@@ -6,10 +6,23 @@
 <title>Checkout - My Shop</title>
 
 <link rel="stylesheet" href="style.css">
-
 <script type="module" src="checkout.js"></script>
 
 <style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:0;
+}
+
+header{
+background:#0a7cff;
+color:#fff;
+padding:15px;
+text-align:center;
+}
+
 .checkout{
 max-width:700px;
 margin:20px auto;
@@ -31,6 +44,15 @@ margin:auto;
 border-radius:10px;
 }
 
+.upi{
+text-align:center;
+font-size:18px;
+font-weight:bold;
+margin:15px 0;
+color:#0a7cff;
+word-break:break-all;
+}
+
 .checkout input,
 .checkout textarea{
 width:100%;
@@ -39,26 +61,68 @@ margin:10px 0;
 border:1px solid #ccc;
 border-radius:8px;
 font-size:16px;
+box-sizing:border-box;
 }
 
 .checkout button{
 width:100%;
 padding:14px;
 background:#0a7cff;
-color:#fff;
+color:white;
 border:none;
 border-radius:8px;
 font-size:18px;
 cursor:pointer;
 }
 
-.upi{
-text-align:center;
-font-size:18px;
-font-weight:bold;
-margin:15px 0;
-color:#0a7cff;
+.checkout button:hover{
+background:#0867d8;
 }
 </style>
 
-</head
+</head>
+
+<body>
+
+<header>
+<h1>🛒 My Shop Checkout</h1>
+</header>
+
+<div class="checkout">
+
+<h2>Complete Your Payment</h2>
+
+<img src="payment-qr.png" alt="QR Code">
+
+<div class="upi">
+UPI ID : <b>skyler4567@ybl</b>
+</div>
+
+<input
+type="text"
+id="name"
+placeholder="Enter Your Name">
+
+<input
+type="tel"
+id="mobile"
+placeholder="Enter Mobile Number">
+
+<textarea
+id="address"
+rows="4"
+placeholder="Enter Delivery Address"></textarea>
+
+<input
+type="file"
+id="screenshot"
+accept="image/*">
+
+<button id="placeOrderBtn">
+Place Order
+</button>
+
+</div>
+
+</body>
+</html>
