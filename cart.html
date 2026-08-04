@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - My Shop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1>🛒 My Shop</h1>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="cart.html">Cart</a>
+<a href="login.html">Login</a>
+</nav>
+
+</header>
+
+<div class="product">
+<h2>Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<h3 id="total">Total: ₹0</h3>
+
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = 0;
+let output = "";
+
+if(cart.length === 0){
+    output = "<p>Your cart is empty.</p>";
+}else{
+    cart.forEach(item=>{
+        total += item.price;
+        output += `
+        <div style="padding:10px;border-bottom:1px solid #ddd;">
+            <h3>${item.name}</h3>
+            <p>₹${item.price}</p>
+        </div>`;
+    });
+}
+
+document.getElementById("cartItems").innerHTML = output;
+document.getElementById("total").innerHTML = "Total: ₹" + total;
+
+function checkout(){
+    if(cart.length===0){
+        alert("Cart is empty!");
+        return;
+    }
+
+    alert("Order placed successfully!");
+    localStorage.removeItem("cart");
+    location.reload();
+}
+</script>
+
+</body>
+</html>
