@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Products - My Shop</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script type="module" src="products.js"></script>
+
 </head>
 <body>
 
@@ -16,43 +20,32 @@
 <a href="products.html">Products</a>
 <a href="cart.html">Cart</a>
 <a href="login.html">Login</a>
+<a href="admin.html">Admin</a>
 </nav>
 
 </header>
 
-<div class="products">
+<div class="search-box">
 
-<div class="product">
-<img src="https://picsum.photos/300?1" alt="">
-<h2>Wireless Earbuds</h2>
-<p class="price">₹999</p>
-<button onclick="addToCart(1,'Wireless Earbuds',999)">Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="https://picsum.photos/300?2" alt="">
-<h2>Smart Watch</h2>
-<p class="price">₹1999</p>
-<button onclick="addToCart(2,'Smart Watch',1999)">Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="https://picsum.photos/300?3" alt="">
-<h2>Bluetooth Speaker</h2>
-<p class="price">₹1499</p>
-<button onclick="addToCart(3,'Bluetooth Speaker',1499)">Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="https://picsum.photos/300?4" alt="">
-<h2>Power Bank</h2>
-<p class="price">₹899</p>
-<button onclick="addToCart(4,'Power Bank',899)">Add to Cart</button>
-</div>
+<input
+type="text"
+id="search"
+placeholder="Search Products..."
+style="width:90%;padding:12px;margin:20px;border:1px solid #ccc;border-radius:6px;">
 
 </div>
 
-<script src="script.js"></script>
+<div id="productList" style="
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:20px;
+">
+
+<h2>Loading Products...</h2>
+
+</div>
 
 </body>
 </html>
