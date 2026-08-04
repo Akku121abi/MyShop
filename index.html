@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Shop</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script type="module" src="index.js"></script>
+
 </head>
 <body>
 
@@ -16,52 +20,34 @@
 <a href="products.html">Products</a>
 <a href="cart.html">Cart</a>
 <a href="login.html">Login</a>
+<a href="admin.html">Admin</a>
 </nav>
+
 </header>
 
 <div class="search-box">
-<input type="text" id="search" placeholder="Search products...">
+
+<input
+type="text"
+id="search"
+placeholder="Search Products..."
+style="width:90%;padding:12px;margin:20px;border:1px solid #ccc;border-radius:6px;">
+
 </div>
 
-<h2 style="text-align:center;">Our Products</h2>
+<h2 style="text-align:center;">Latest Products</h2>
 
-<div id="product-list" class="products"></div>
+<div id="productList" style="
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:20px;
+">
 
-<script>
-let products = JSON.parse(localStorage.getItem("products")) || [];
+<h2>Loading Products...</h2>
 
-let productList = document.getElementById("product-list");
-
-function showProducts(list) {
-    productList.innerHTML = "";
-
-    if (list.length === 0) {
-        productList.innerHTML = "<h3 style='text-align:center;'>No Products Found</h3>";
-        return;
-    }
-
-    list.forEach(product => {
-        productList.innerHTML += `
-        <div class="product">
-            <img src="${product.image}" alt="">
-            <h3>${product.name}</h3>
-            <p class="price">₹${product.price}</p>
-            <p>${product.description}</p>
-        </div>
-        `;
-    });
-}
-
-showProducts(products);
-
-document.getElementById("search").addEventListener("keyup", function () {
-    let value = this.value.toLowerCase();
-    let filtered = products.filter(p =>
-        p.name.toLowerCase().includes(value)
-    );
-    showProducts(filtered);
-});
-</script>
+</div>
 
 </body>
 </html>
