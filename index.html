@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Shop</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
@@ -19,28 +17,51 @@
 <a href="cart.html">Cart</a>
 <a href="login.html">Login</a>
 </nav>
-
 </header>
 
 <div class="search-box">
-<input type="text" placeholder="Search products...">
+<input type="text" id="search" placeholder="Search products...">
 </div>
 
-<div class="product">
+<h2 style="text-align:center;">Our Products</h2>
 
-<img src="https://picsum.photos/300?random=1" alt="Product">
+<div id="product-list" class="products"></div>
 
-<h2>Welcome to My Shop</h2>
+<script>
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-<p class="price">Best Deals Every Day</p>
+let productList = document.getElementById("product-list");
 
-<button onclick="window.location.href='products.html'">
-Shop Now
-</button>
+function showProducts(list) {
+    productList.innerHTML = "";
 
-</div>
+    if (list.length === 0) {
+        productList.innerHTML = "<h3 style='text-align:center;'>No Products Found</h3>";
+        return;
+    }
 
-<script src="script.js"></script>
+    list.forEach(product => {
+        productList.innerHTML += `
+        <div class="product">
+            <img src="${product.image}" alt="">
+            <h3>${product.name}</h3>
+            <p class="price">₹${product.price}</p>
+            <p>${product.description}</p>
+        </div>
+        `;
+    });
+}
+
+showProducts(products);
+
+document.getElementById("search").addEventListener("keyup", function () {
+    let value = this.value.toLowerCase();
+    let filtered = products.filter(p =>
+        p.name.toLowerCase().includes(value)
+    );
+    showProducts(filtered);
+});
+</script>
 
 </body>
 </html>
