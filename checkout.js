@@ -1,19 +1,19 @@
 import { db } from "./firebase.js";
+
 import {
   collection,
   addDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ===== Total Amount =====
-// अभी टेस्ट के लिए 499 रखा है।
-let totalAmount = Number(localStorage.getItem("cartTotal")) || 499;
+// Total Amount
+let totalAmount = Number(localStorage.getItem("cartTotal")) || 0;
 
 // Show Amount
 document.getElementById("amountText").innerHTML =
-`Total Amount : ₹${totalAmount}`;
+"Total Amount : ₹" + totalAmount;
 
-// Unique Order ID
+// Order ID
 const orderId = "ORD" + Date.now();
 
 // UPI Link
@@ -30,7 +30,7 @@ new QRCode(document.getElementById("qrcode"), {
 // Pay Button
 document.getElementById("payBtn").href = upiLink;
 
-// Button
+// Place Order
 const btn = document.getElementById("placeOrderBtn");
 
 btn.addEventListener("click", async () => {
@@ -38,17 +38,55 @@ btn.addEventListener("click", async () => {
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
     const address = document.getElementById("address").value.trim();
-    const screenshot = document.getElementById("screenshot").files[0];
+    const utr = document.getElementById("utr").value.trim();
 
-    if (!name || !mobile || !address) {
+    if (!name || !mobile || !address || !utr) {
         alert("Please fill all details.");
         return;
     }
 
-    if (!screenshot) {
-        alert("Please upload payment screenshot.");
-        return;
+    try {
+
+        await addDoc(collection(db, "orders"), {
+
+            orderId: orderId,
+
+            customerName: name,
+
+            mobile: mobile,
+
+            address: address,
+
+            amount: totalAmount,
+
+            utr: utr,
+
+            paymentMethod: "UPI",
+
+            paymentStatus: "Pending",
+
+            createdAt: serverTimestamp()
+
+        });
+
+        alert("✅ Order Placed Successfully.\nPayment Verification Pending.");
+
+        localStorage.removeItem("cart");
+        localStorage.removeItem("cartTotal");
+
+        document.getElementById("name").value = "";
+        document.getElementById("mobile").value = "";
+        document.getElementById("address").value = "";
+        document.getElementById("utr").value = "";
+
+        window.location.href = "index.html";
+
+    } catch (e) {
+
+        console.error(e);
+
+        alert(e.message);
+
     }
 
-    alert("Part 1 Working ✅");
 });
