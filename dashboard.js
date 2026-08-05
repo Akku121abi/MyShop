@@ -1,109 +1,88 @@
-// ===== dashboard.js =====
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Sidebar
+window.showPage = function (pageId) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(pageId).classList.add("active");
+};
 
 // Load Products
-let products = JSON.parse(localStorage.getItem("products")) || [];
+async function loadProducts() {
+  const table = document.getElementById("productTable");
+  table.innerHTML = "";
 
-function showPage(pageId) {
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+  const snapshot = await getDocs(collection(db, "products"));
 
-    document.getElementById(pageId).classList.add("active");
+  document.getElementById("productCount").innerText = snapshot.size;
 
-    document.querySelectorAll(".sidebar li").forEach(item => {
-        item.classList.remove("active");
-    });
+  snapshot.forEach((item) => {
 
-    event.target.classList.add("active");
-}
+    const product = item.data();
 
-function addProduct() {
-
-    let name = document.getElementById("productName").value;
-    let price = document.getElementById("productPrice").value;
-
-    if(name==="" || price===""){
-        alert("Enter Product Name & Price");
-        return;
-    }
-
-    products.push({
-        name:name,
-        price:price
-    });
-
-    localStorage.setItem("products",JSON.stringify(products));
-
-    document.getElementById("productName").value="";
-    document.getElementById("productPrice").value="";
-
-    loadProducts();
-}
-
-function loadProducts(){
-
-    let table=document.getElementById("productTable");
-
-    table.innerHTML="";
-
-    products.forEach((product,index)=>{
-
-        table.innerHTML+=`
-        <tr>
-
+    table.innerHTML += `
+      <tr>
         <td>${product.name}</td>
-
         <td>₹${product.price}</td>
-
         <td>
-
-        <button onclick="deleteProduct(${index})">
-
-        Delete
-
-        </button>
-
+          <button onclick="deleteProduct('${item.id}')">
+            Delete
+          </button>
         </td>
-
-        </tr>
-        `;
-
-    });
-
-    document.getElementById("productCount").innerText=products.length;
-
+      </tr>
+    `;
+  });
 }
 
-function deleteProduct(index){
+// Add Product
+window.addProduct = async function () {
 
-    products.splice(index,1);
+  const name = document.getElementById("productName").value.trim();
+  const price = document.getElementById("productPrice").value.trim();
 
-    localStorage.setItem("products",JSON.stringify(products));
+  if (!name || !price) {
+    alert("Enter Product Name & Price");
+    return;
+  }
 
-    loadProducts();
+  await addDoc(collection(db, "products"), {
+    name: name,
+    price: Number(price)
+  });
 
-}
+  document.getElementById("productName").value = "";
+  document.getElementById("productPrice").value = "";
 
-function clearData(){
+  loadProducts();
+};
 
-    if(confirm("Delete All Products?")){
+// Delete Product
+window.deleteProduct = async function (id) {
 
-        localStorage.removeItem("products");
+  await deleteDoc(doc(db, "products", id));
 
-        products=[];
+  loadProducts();
+};
 
-        loadProducts();
+// Clear Data
+window.clearData = async function () {
 
-    }
+  alert("Delete All अभी disabled है।");
+};
 
-}
+// Logout
+window.logout = function () {
+  window.location.href = "login.html";
+};
 
-function logout(){
-
-    alert("Logout Successful");
-
-    window.location.href="login.html";
-
-}
-
-loadProducts();
+loadProducts();loadProducts();
