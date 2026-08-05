@@ -86,7 +86,11 @@ window.location.href="checkout.html";
 
 }
 
-</script>
+</script>function clearCart() {
+    localStorage.removeItem("cart");
+    localStorage.removeItem("cartTotal");
+    location.reload();
+}
 
 </body>
 </html>
