@@ -6,14 +6,16 @@
 <title>Checkout - My Shop</title>
 
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module" src="checkout.js"></script>
 
 <style>
 body{
-font-family:Arial,sans-serif;
-background:#f5f5f5;
 margin:0;
 padding:0;
+font-family:Arial,sans-serif;
+background:#f5f5f5;
 }
 
 header{
@@ -34,23 +36,32 @@ box-shadow:0 5px 15px rgba(0,0,0,.15);
 
 .checkout h2{
 text-align:center;
-margin-bottom:20px;
 }
 
-.checkout img{
-width:260px;
-display:block;
-margin:auto;
-border-radius:10px;
+#qrcode{
+display:flex;
+justify-content:center;
+margin:20px 0;
 }
 
-.upi{
+#amountText{
 text-align:center;
-font-size:18px;
+font-size:22px;
 font-weight:bold;
-margin:15px 0;
 color:#0a7cff;
-word-break:break-all;
+margin-bottom:15px;
+}
+
+#payBtn{
+display:block;
+text-align:center;
+padding:14px;
+background:#0a7cff;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-size:18px;
+margin-bottom:20px;
 }
 
 .checkout input,
@@ -67,7 +78,7 @@ box-sizing:border-box;
 .checkout button{
 width:100%;
 padding:14px;
-background:#0a7cff;
+background:#28a745;
 color:white;
 border:none;
 border-radius:8px;
@@ -76,7 +87,7 @@ cursor:pointer;
 }
 
 .checkout button:hover{
-background:#0867d8;
+background:#218838;
 }
 </style>
 
@@ -85,18 +96,26 @@ background:#0867d8;
 <body>
 
 <header>
-<h1>🛒 My Shop Checkout</h1>
+<h1>🛒 Checkout</h1>
 </header>
 
 <div class="checkout">
 
-<h2>Complete Your Payment</h2>
+<h2>Complete Payment</h2>
 
-<img src="payment-qr.png" alt="QR Code">
-
-<div class="upi">
-UPI ID : <b>skyler4567@ybl</b>
+<div id="amountText">
+Loading Amount...
 </div>
+
+<div id="qrcode"></div>
+
+<a id="payBtn" href="#">
+Pay with UPI
+</a>
+
+<p style="text-align:center;font-weight:bold;">
+UPI ID : skyler4567@ybl
+</p>
 
 <input
 type="text"
@@ -111,7 +130,7 @@ placeholder="Enter Mobile Number">
 <textarea
 id="address"
 rows="4"
-placeholder="Enter Delivery Address"></textarea>
+placeholder="Delivery Address"></textarea>
 
 <input
 type="file"
