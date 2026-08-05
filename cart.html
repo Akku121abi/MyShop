@@ -57,9 +57,19 @@ function checkout(){
         return;
     }
 
-    alert("Order placed successfully!");
-    localStorage.removeItem("cart");
-    location.reload();
+    function checkout(){
+
+    if(cart.length === 0){
+        alert("Cart is empty!");
+        return;
+    }
+
+    // Cart Total Save
+    localStorage.setItem("cartTotal", total);
+
+    // Checkout Page Open
+    window.location.href = "checkout.html";
+    }
 }
 </script>
 
