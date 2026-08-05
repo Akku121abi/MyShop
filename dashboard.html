@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="dashboard.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2 class="logo">MY PANEL</h2>
+
+<ul>
+
+<li class="active" onclick="showPage('home')">
+<i class="fa-solid fa-house"></i> Dashboard
+</li>
+
+<li onclick="showPage('products')">
+<i class="fa-solid fa-box"></i> Products
+</li>
+
+<li onclick="showPage('orders')">
+<i class="fa-solid fa-cart-shopping"></i> Orders
+</li>
+
+<li onclick="showPage('users')">
+<i class="fa-solid fa-users"></i> Users
+</li>
+
+<li onclick="showPage('payments')">
+<i class="fa-solid fa-wallet"></i> Payments
+</li>
+
+<li onclick="showPage('settings')">
+<i class="fa-solid fa-gear"></i> Settings
+</li>
+
+<li onclick="logout()">
+<i class="fa-solid fa-right-from-bracket"></i> Logout
+</li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<header>
+
+<h1>Admin Dashboard</h1>
+
+</header>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="cards">
+
+<div class="card">
+<h2 id="productCount">0</h2>
+<p>Total Products</p>
+</div>
+
+<div class="card">
+<h2 id="orderCount">0</h2>
+<p>Total Orders</p>
+</div>
+
+<div class="card">
+<h2 id="userCount">0</h2>
+<p>Total Users</p>
+</div>
+
+<div class="card">
+<h2 id="earning">₹0</h2>
+<p>Total Earnings</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<h2>Products</h2>
+
+<input type="text" id="productName" placeholder="Product Name">
+
+<input type="number" id="productPrice" placeholder="Price">
+
+<button onclick="addProduct()">
+Add Product
+</button>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+
+<th>Price</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productTable">
+
+</tbody>
+
+</table>
+
+</section>
+
+<!-- ORDERS -->
+
+<section id="orders" class="page">
+
+<h2>Orders</h2>
+
+<p>No Orders Available</p>
+
+</section>
+
+<!-- USERS -->
+
+<section id="users" class="page">
+
+<h2>Users</h2>
+
+<p>No Users Found</p>
+
+</section>
+
+<!-- PAYMENTS -->
+
+<section id="payments" class="page">
+
+<h2>Payments</h2>
+
+<p>Total Balance : ₹0</p>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+
+<h2>Settings</h2>
+
+<button onclick="clearData()">
+Clear All Data
+</button>
+
+</section>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
