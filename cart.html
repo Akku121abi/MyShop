@@ -29,10 +29,12 @@
 
 <div id="cartItems"></div>
 
-<h3 id="total">Total: ₹0</h3>
+<h3 id="total">Total : ₹0</h3>
 
 <button onclick="checkout()">Proceed To Checkout</button>
+
 <button onclick="clearCart()">🗑️ Clear Cart</button>
+
 </div>
 
 <script>
@@ -45,22 +47,22 @@ let output = "";
 
 if(cart.length === 0){
 
-output = "<p>Your cart is empty.</p>";
+    output = "<p>Your cart is empty.</p>";
 
 }else{
 
-cart.forEach(item=>{
+    cart.forEach(item=>{
 
-total += Number(item.price);
+        total += Number(item.price);
 
-output += `
-<div style="padding:10px;border-bottom:1px solid #ddd;">
-<h3>${item.name}</h3>
-<p>₹${item.price}</p>
-</div>
-`;
+        output += `
+        <div style="padding:10px;border-bottom:1px solid #ddd;">
+            <h3>${item.name}</h3>
+            <p>₹${item.price}</p>
+        </div>
+        `;
 
-});
+    });
 
 }
 
@@ -70,27 +72,31 @@ document.getElementById("total").innerHTML = "Total : ₹" + total;
 
 function checkout(){
 
-if(cart.length===0){
+    if(cart.length === 0){
 
-alert("Cart is empty!");
+        alert("Cart is empty!");
+        return;
 
-return;
+    }
 
-}
+    localStorage.setItem("cartTotal", total);
 
-// Total Save
-localStorage.setItem("cartTotal", total);
-
-// Checkout Page Open
-window.location.href="checkout.html";
+    window.location.href = "checkout.html";
 
 }
 
-</script>function clearCart() {
+function clearCart(){
+
     localStorage.removeItem("cart");
     localStorage.removeItem("cartTotal");
+
+    alert("Cart Cleared Successfully!");
+
     location.reload();
+
 }
+
+</script>
 
 </body>
 </html>
