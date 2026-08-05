@@ -18,7 +18,7 @@ const orderId = "ORD" + Date.now();
 
 // UPI Link
 const upiLink =
-`upi://pay?pa=skyler4567@ybl&pn=Akash&am=${totalAmount}&cu=INR&tn=${orderId}`;
+`upi://pay?pa=akash5601@fifederal&pn=Akash&am=${totalAmount}&cu=INR&tn=${orderId}`;
 
 // QR Generate
 new QRCode(document.getElementById("qrcode"), {
